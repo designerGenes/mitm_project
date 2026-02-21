@@ -1,0 +1,604 @@
+openapi: 3.1.0
+info:
+  title: Watcher
+  version: 0.1.0
+  description: |
+    HTTP traffic capture and query daemon for iOS simulator testing.
+
+    Watcher wraps mitmproxy to capture HTTP traffic from an iOS simulator,
+    organizes it by spans, and provides a query engine for asserting on
+    captured traffic from XCUITests.
+
+servers:
+  - url: http://localhost:9090
+    description: Local development (default port)
+
+paths:
+  /health:
+    get:
+      operationId: health
+      summary: Health check
+      description: Returns OK if the daemon is alive.
+      responses:
+        "200":
+          description: Daemon is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status]
+                properties:
+                  status:
+                    type: string
+                    const: ok
+              example:
+                status: ok
+
+  /status:
+    get:
+      operationId: status
+      summary: Daemon status
+      description: |
+        Returns the current daemon state including configuration,
+        active span, exchange count, and span history.
+      responses:
+        "200":
+          description: Current daemon status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusResponse"
+              example:
+                config:
+                  api_port: 9090
+                  proxy_port: 8080
+                  output_dir: ~/Library/Application Support/Watcher/traffic
+                  verbose: false
+                  unsafe: false
+                current_span: login
+                exchange_count: 42
+                spans:
+                  login:
+                    started_at: "2025-01-15T10:30:00.000Z"
+                    stopped_at: null
+                  setup:
+                    started_at: "2025-01-15T10:29:00.000Z"
+                    stopped_at: "2025-01-15T10:29:55.000Z"
+
+  /reset:
+    post:
+      operationId: reset
+      summary: Reset all data
+      description: Clears all captured exchanges, spans, and disk data.
+      responses:
+        "200":
+          description: Data cleared
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status]
+                properties:
+                  status:
+                    type: string
+                    const: reset
+              example:
+                status: reset
+
+  /admin/shutdown:
+    post:
+      operationId: shutdown
+      summary: Shut down the daemon
+      description: |
+        Initiates a graceful shutdown. Typically called by the CLI
+        (`watcher stop`), not by iOS tests.
+      responses:
+        "200":
+          description: Shutdown initiated
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status]
+                properties:
+                  status:
+                    type: string
+                    const: shutting_down
+              example:
+                status: shutting_down
+
+  /span/start:
+    post:
+      operationId: spanStart
+      summary: Start a named span
+      description: |
+        Begin a named span. All subsequent captured traffic is tagged with
+        this name until the span is stopped or replaced.
+
+        If another span is already active, it is auto-closed and the new
+        span begins immediately. The response includes the name of the
+        auto-closed span in the `auto_closed` field.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SpanStartRequest"
+            example:
+              name: login
+      responses:
+        "200":
+          description: Span started
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status, name]
+                properties:
+                  status:
+                    type: string
+                    const: started
+                  name:
+                    type: string
+                    description: Name of the started span
+                  auto_closed:
+                    type: string
+                    description: Name of the previously active span that was auto-closed (only present if applicable)
+              examples:
+                fresh_start:
+                  summary: No previous span
+                  value:
+                    status: started
+                    name: login
+                auto_close:
+                  summary: Previous span auto-closed
+                  value:
+                    status: started
+                    name: checkout
+                    auto_closed: login
+
+  /span/stop:
+    post:
+      operationId: spanStop
+      summary: Stop the current span
+      description: |
+        End the currently active span. Subsequent traffic becomes unspanned.
+        Returns the name of the stopped span, or `no_active_span` if no
+        span was active.
+      responses:
+        "200":
+          description: Span stopped (or no active span)
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status]
+                properties:
+                  status:
+                    type: string
+                    enum: [stopped, no_active_span]
+                  name:
+                    type: string
+                    description: Name of the stopped span (only present when status is "stopped")
+              examples:
+                stopped:
+                  summary: Span was active and stopped
+                  value:
+                    status: stopped
+                    name: login
+                no_span:
+                  summary: No span was active
+                  value:
+                    status: no_active_span
+
+  /query:
+    post:
+      operationId: query
+      summary: Exchange-level query
+      description: |
+        Ask questions about a specific captured HTTP exchange.
+
+        The query pipeline:
+        1. **Scope** — filter exchanges by span name
+        2. **Target** — filter by domain, endpoint, method
+        3. **Occurrence** — select which matching exchange (0=first, -1=most recent)
+        4. **Questions** — evaluate each question against the selected exchange
+        5. **Response** — wrap answers in the standard envelope
+
+        Some question types skip occurrence selection:
+        - `request_exists` and `request_count` operate on the full filtered list
+        - Metric questions with `aggregate` operate across all matches
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueryRequest"
+            example:
+              scope: login
+              target:
+                domain: api.example.com
+                endpoint: /auth
+                method: POST
+              questions:
+                - type: response_status
+                - type: response_header_value
+                  name: content-type
+                - type: response_body_key_path
+                  path: user.name
+      responses:
+        "200":
+          description: Query results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryResponse"
+              examples:
+                found:
+                  summary: Exchange found with answers
+                  value:
+                    found: true
+                    matched_count: 1
+                    occurrence_used: 0
+                    answers:
+                      - found: true
+                        value: 200
+                      - found: true
+                        value: application/json
+                      - found: true
+                        value: Alice
+                not_found:
+                  summary: No matching exchange
+                  value:
+                    found: false
+                    matched_count: 0
+                    reason: no_matching_exchange
+                    answers: []
+
+  /span/query:
+    post:
+      operationId: spanQuery
+      summary: Span-level query
+      description: |
+        Ask meta questions about an entire span of captured traffic.
+        Returns aggregate information like total request count, domains
+        contacted, error rates, timing, etc.
+
+        An optional `filter` can narrow which exchanges within the span
+        are considered.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SpanQueryRequest"
+            example:
+              scope: checkout
+              filter:
+                domain: api.example.com
+              questions:
+                - type: total_request_count
+                - type: domains_contacted
+                - type: error_count
+      responses:
+        "200":
+          description: Span query results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SpanQueryResponse"
+              examples:
+                found:
+                  summary: Span found with answers
+                  value:
+                    found: true
+                    answers:
+                      - found: true
+                        value: 14
+                      - found: true
+                        value: [api.example.com, cdn.example.com]
+                      - found: true
+                        value: 0
+                not_found:
+                  summary: Span does not exist
+                  value:
+                    found: false
+                    reason: span_not_found
+                    answers: []
+
+components:
+  schemas:
+    SpanStartRequest:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+          description: Name for the span
+
+    QueryRequest:
+      type: object
+      required: [scope]
+      properties:
+        scope:
+          type: string
+          description: |
+            Which span to search. A span name, `"unspanned"` for traffic
+            with no span, or `"all"` for all traffic.
+          examples: [login, unspanned, all]
+        target:
+          $ref: "#/components/schemas/QueryTarget"
+        questions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Question"
+          default: []
+
+    QueryTarget:
+      type: object
+      description: Filters exchanges by domain, endpoint, method, and selects by occurrence.
+      properties:
+        domain:
+          type: string
+          description: Exact match on normalized hostname (lowercased)
+          examples: [api.example.com]
+        endpoint:
+          type: string
+          description: |
+            Exact match on normalized path. Trailing slashes are stripped.
+            Query parameters are not included (they're stored separately).
+          examples: [/users, /auth/login]
+        method:
+          type: string
+          description: HTTP method (case-insensitive)
+          enum: [GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS]
+        occurrence:
+          type: integer
+          default: 0
+          description: |
+            Index into matched results ordered by timestamp.
+            `0` = first recorded, `1` = second, `-1` = most recent.
+            Negative indices count from the end.
+
+    Question:
+      type: object
+      required: [type]
+      description: |
+        A question to ask about a captured HTTP exchange.
+        The `type` field determines which additional parameters are required.
+      properties:
+        type:
+          type: string
+          description: The question type
+          enum:
+            - request_exists
+            - request_count
+            - response_status
+            - response_header_value
+            - request_header_value
+            - response_header_exists
+            - request_header_exists
+            - response_body_key_path
+            - count_at_key_path
+            - response_body_contains
+            - response_body_raw
+            - response_content_type
+            - request_body_key_path
+            - request_body_raw
+            - request_content_type
+            - query_param_value
+            - query_param_exists
+            - response_time_ms
+            - response_body_size_bytes
+            - request_body_size_bytes
+        name:
+          type: string
+          description: |
+            Header name (for `*_header_value`, `*_header_exists`) or
+            query parameter name (for `query_param_value`, `query_param_exists`).
+        path:
+          type: string
+          description: |
+            JSON key path (for `response_body_key_path`, `request_body_key_path`,
+            `count_at_key_path`). Dot notation for objects (`user.name`),
+            bracket notation for arrays (`users[0].name`).
+        substring:
+          type: string
+          description: Substring to search for (for `response_body_contains`).
+        aggregate:
+          type: string
+          enum: [avg, min, max, sum]
+          description: |
+            Aggregate modifier for metric questions (`response_time_ms`,
+            `response_body_size_bytes`, `request_body_size_bytes`).
+            When present, occurrence is ignored and the metric is computed
+            across all matched exchanges.
+
+    SpanQueryRequest:
+      type: object
+      required: [scope]
+      properties:
+        scope:
+          type: string
+          description: Span name, `"unspanned"`, or `"all"`.
+        filter:
+          $ref: "#/components/schemas/SpanFilter"
+        questions:
+          type: array
+          items:
+            $ref: "#/components/schemas/SpanQuestion"
+          default: []
+
+    SpanFilter:
+      type: object
+      description: |
+        Optional filter to narrow which exchanges within the span are
+        considered. All fields are optional.
+      properties:
+        domain:
+          type: string
+          description: Filter by domain
+        endpoint:
+          type: string
+          description: Filter by endpoint
+        method:
+          type: string
+          description: Filter by HTTP method
+          enum: [GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS]
+
+    SpanQuestion:
+      type: object
+      required: [type]
+      description: A meta question about an entire span of traffic.
+      properties:
+        type:
+          type: string
+          description: The span question type
+          enum:
+            - total_request_count
+            - domains_contacted
+            - endpoints_contacted
+            - methods_used
+            - unique_exchanges
+            - total_duration_ms
+            - span_start_time
+            - span_end_time
+            - avg_response_time_ms
+            - slowest_request
+            - error_count
+            - error_rate
+            - status_code_summary
+
+    QueryResponse:
+      type: object
+      required: [found, answers]
+      description: |
+        Response from `POST /query`. Two-level `found`:
+        - Top-level `found`: did scope + target resolve to at least one exchange?
+        - Per-answer `found`: could this specific question be answered?
+      properties:
+        found:
+          type: boolean
+          description: Whether the scope + target matched at least one exchange
+        matched_count:
+          type: integer
+          description: Number of exchanges matching the target filter
+          default: 0
+        occurrence_used:
+          type: integer
+          nullable: true
+          description: Which occurrence index was selected
+        reason:
+          type: string
+          nullable: true
+          description: Error reason when `found` is false
+          enum:
+            - no_matching_exchange
+            - occurrence_out_of_range
+        answers:
+          type: array
+          items:
+            $ref: "#/components/schemas/AnswerResult"
+
+    SpanQueryResponse:
+      type: object
+      required: [found, answers]
+      description: Response from `POST /span/query`.
+      properties:
+        found:
+          type: boolean
+          description: Whether the span exists
+        reason:
+          type: string
+          nullable: true
+          description: Error reason (e.g., `span_not_found`)
+        answers:
+          type: array
+          items:
+            $ref: "#/components/schemas/AnswerResult"
+
+    AnswerResult:
+      type: object
+      required: [found]
+      description: A single answer to a query question.
+      properties:
+        found:
+          type: boolean
+          description: Whether the question could be answered
+        value:
+          description: |
+            The answer value. Type depends on the question:
+            - `int` for status codes, counts, sizes
+            - `float` for durations, rates, averages
+            - `string` for header values, content types, timestamps
+            - `bool` for existence checks, contains
+            - `array` for domains, endpoints, methods, unique exchanges
+            - `object` for slowest_request, status_code_summary
+            - `null` when not found or not applicable
+        reason:
+          type: string
+          nullable: true
+          description: Error reason when `found` is false
+          enum:
+            - key_not_found
+            - index_out_of_bounds
+            - body_not_json
+            - body_empty
+            - header_not_found
+            - not_applicable
+
+    StatusResponse:
+      type: object
+      required: [exchange_count]
+      properties:
+        config:
+          $ref: "#/components/schemas/StatusConfig"
+        current_span:
+          type: string
+          nullable: true
+          description: Name of the currently active span, or null
+        exchange_count:
+          type: integer
+          description: Total number of captured exchanges
+        spans:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/SpanInfo"
+          description: Map of span name to span info
+
+    StatusConfig:
+      type: object
+      properties:
+        api_port:
+          type: integer
+          description: HTTP API server port
+          default: 9090
+        proxy_port:
+          type: integer
+          description: mitmproxy listening port
+          default: 8080
+        output_dir:
+          type: string
+          description: Output directory for traffic data
+        verbose:
+          type: boolean
+          description: Whether verbose logging is enabled
+          default: false
+        unsafe:
+          type: boolean
+          description: Whether TLS verification is disabled
+          default: false
+
+    SpanInfo:
+      type: object
+      properties:
+        started_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: When the span started
+        stopped_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: When the span stopped (null if still active)

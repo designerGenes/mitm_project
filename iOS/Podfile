@@ -1,0 +1,11 @@
+platform :ios, '16.0'
+
+# Example Podfile showing how to consume WatcherClient via CocoaPods.
+# This references the local podspec for development; in production you
+# would point to a spec repo or use :git => '<repo-url>'.
+
+target 'DemoApp' do
+  use_frameworks!
+
+  pod 'WatcherClient', :path => '.'
+end
