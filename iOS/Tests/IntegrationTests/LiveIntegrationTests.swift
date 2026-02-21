@@ -6,7 +6,7 @@
 ///   2. Run these tests:           cd iOS && swift test --filter IntegrationTests
 ///
 /// These tests generate HTTP traffic through the mitmproxy (port 8080), then
-/// use the WireKit client to query the captured traffic (port 9090).
+/// use the WireKit client to query the captured traffic (port 18081).
 /// Tests are automatically skipped if the daemon is not running.
 
 import XCTest
@@ -30,12 +30,12 @@ final class LiveIntegrationTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        Wire.configure(port: 9090)
+        Wire.configure(port: 18081)
 
         // Skip entire test class if daemon is not reachable
         guard (try? Wire.health()) == true else {
             continueAfterFailure = false
-            XCTFail("WIRE daemon (WIREd) not running on :9090. Start it with: uv run wire start --foreground")
+            XCTFail("WIRE daemon (WIREd) not running on :18081. Start it with: uv run wire start --foreground")
             return
         }
         try? Wire.reset()

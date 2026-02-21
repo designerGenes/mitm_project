@@ -4,7 +4,7 @@ import Foundation
 ///
 /// Usage:
 /// ```swift
-/// // Optional: configure a custom port (default 9090)
+/// // Optional: configure a custom port (default 18081)
 /// Wire.configure(port: 9091)
 ///
 /// // Start a span
@@ -32,7 +32,7 @@ public enum Wire {
     /// Configure the connection to the Wire daemon.
     /// Call this in your test setUp if not using the default port.
     public static func configure(
-        port: Int = 9090,
+        port: Int = 18081,
         host: String = "localhost",
         session: URLSession = .shared,
         timeout: TimeInterval = 10

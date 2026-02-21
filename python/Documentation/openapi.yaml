@@ -10,7 +10,7 @@ info:
     captured traffic from XCUITests.
 
 servers:
-  - url: http://localhost:9090
+  - url: http://localhost:18081
     description: Local development (default port)
 
 paths:
@@ -50,9 +50,9 @@ paths:
                 $ref: "#/components/schemas/StatusResponse"
               example:
                 config:
-                  api_port: 9090
+                  api_port: 18081
                   proxy_port: 8080
-                  output_dir: ~/Library/Application Support/WIRE/traffic
+                  output_dir: ~/.wire/traffic
                   verbose: false
                   unsafe: false
                 current_span: login
@@ -572,7 +572,7 @@ components:
         api_port:
           type: integer
           description: HTTP API server port
-          default: 9090
+          default: 18081
         proxy_port:
           type: integer
           description: mitmproxy listening port

@@ -10,12 +10,12 @@ from pathlib import Path
 LABEL = "com.wire.wired"
 PLIST_DIR = Path.home() / "Library" / "LaunchAgents"
 PLIST_PATH = PLIST_DIR / f"{LABEL}.plist"
-LOG_DIR = Path.home() / "Library" / "Logs" / "WIRE"
+LOG_DIR = Path.home() / ".wire" / "logs"
 
 
 def generate_plist(
     *,
-    port: int = 9090,
+    port: int = 18081,
     proxy_port: int = 8080,
     output_dir: str | None = None,
     verbose: bool = False,
@@ -52,7 +52,7 @@ def generate_plist(
 
 def write_plist(
     *,
-    port: int = 9090,
+    port: int = 18081,
     proxy_port: int = 8080,
     output_dir: str | None = None,
     verbose: bool = False,

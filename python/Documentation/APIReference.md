@@ -4,7 +4,7 @@ Human-readable reference for the WIRE daemon's HTTP API. For the machine-readabl
 
 ## Server
 
-Default: `http://localhost:9090`
+Default: `http://localhost:18081`
 
 Configurable via `wire start --port <port>`.
 
@@ -17,7 +17,7 @@ Configurable via `wire start --port <port>`.
 Health check. Returns OK if the daemon is alive.
 
 ```bash
-curl http://localhost:9090/health
+curl http://localhost:18081/health
 ```
 
 ```json
@@ -29,15 +29,15 @@ curl http://localhost:9090/health
 Current daemon state.
 
 ```bash
-curl http://localhost:9090/status
+curl http://localhost:18081/status
 ```
 
 ```json
 {
   "config": {
-    "api_port": 9090,
+    "api_port": 18081,
     "proxy_port": 8080,
-    "output_dir": "~/Library/Application Support/WIRE/traffic",
+    "output_dir": "~/.wire/traffic",
     "verbose": false,
     "unsafe": false
   },
@@ -55,7 +55,7 @@ curl http://localhost:9090/status
 Clear all captured exchanges, spans, and disk data.
 
 ```bash
-curl -X POST http://localhost:9090/reset
+curl -X POST http://localhost:18081/reset
 ```
 
 ```json
@@ -67,7 +67,7 @@ curl -X POST http://localhost:9090/reset
 Initiate graceful shutdown. Used by the CLI (`wire stop`).
 
 ```bash
-curl -X POST http://localhost:9090/admin/shutdown
+curl -X POST http://localhost:18081/admin/shutdown
 ```
 
 ```json
@@ -81,7 +81,7 @@ Start a named span. All subsequent captured traffic is tagged with this name.
 If another span is already active, it is auto-closed first.
 
 ```bash
-curl -X POST http://localhost:9090/span/start \
+curl -X POST http://localhost:18081/span/start \
   -H "Content-Type: application/json" \
   -d '{"name": "login"}'
 ```
@@ -101,7 +101,7 @@ With auto-close:
 Stop the current span. Subsequent traffic becomes unspanned.
 
 ```bash
-curl -X POST http://localhost:9090/span/stop
+curl -X POST http://localhost:18081/span/stop
 ```
 
 ```json
@@ -119,7 +119,7 @@ If no span is active:
 Exchange-level query. Ask questions about a specific captured HTTP exchange.
 
 ```bash
-curl -X POST http://localhost:9090/query \
+curl -X POST http://localhost:18081/query \
   -H "Content-Type: application/json" \
   -d '{
     "scope": "login",
@@ -152,7 +152,7 @@ curl -X POST http://localhost:9090/query \
 Span-level query. Ask meta questions about an entire span of traffic.
 
 ```bash
-curl -X POST http://localhost:9090/span/query \
+curl -X POST http://localhost:18081/span/query \
   -H "Content-Type: application/json" \
   -d '{
     "scope": "login",
@@ -378,9 +378,9 @@ wire start [OPTIONS]
 
 | Flag | Default | Description |
 |------|---------|-------------|
-| `--port` | `9090` | HTTP API server port |
+| `--port` | `18081` | HTTP API server port |
 | `--proxy-port` | `8080` | mitmproxy listening port |
-| `--output` | `~/Library/Application Support/WIRE/traffic/` | Output directory for disk data |
+| `--output` | `~/.wire/traffic/` | Output directory for disk data |
 | `--verbose` | `false` | Log captured traffic to stdout |
 | `--unsafe` | `false` | Skip upstream TLS verification (for corporate proxies) |
 | `--foreground` | `false` | Run in foreground instead of as a launchd service |

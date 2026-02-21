@@ -40,11 +40,11 @@ final class WireUITests: XCTestCase {
         app = XCUIApplication()
         app.launch()
 
-        Wire.configure(port: 9090)
+        Wire.configure(port: 18081)
 
         // Skip all tests if daemon is unreachable
         let healthy = (try? Wire.health()) ?? false
-        try XCTSkipUnless(healthy, "WIRE daemon (WIREd) not running on :9090")
+        try XCTSkipUnless(healthy, "WIRE daemon (WIREd) not running on :18081")
 
         try Wire.reset()
     }

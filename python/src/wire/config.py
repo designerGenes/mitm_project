@@ -1,16 +1,15 @@
 from __future__ import annotations
 
-import os
 from dataclasses import dataclass, field
 from pathlib import Path
 
 
-_DEFAULT_OUTPUT = Path.home() / "Library" / "Application Support" / "WIRE" / "traffic"
+_DEFAULT_OUTPUT = Path.home() / ".wire" / "traffic"
 
 
 @dataclass
 class WireConfig:
-    api_port: int = 9090
+    api_port: int = 18081
     proxy_port: int = 8080
     output_dir: Path = field(default_factory=lambda: _DEFAULT_OUTPUT)
     verbose: bool = False

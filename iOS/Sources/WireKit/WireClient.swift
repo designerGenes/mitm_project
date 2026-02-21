@@ -17,7 +17,7 @@ public final class WireClient: @unchecked Sendable {
     private let decoder = JSONDecoder()
 
     public init(
-        port: Int = 9090,
+        port: Int = 18081,
         host: String = "localhost",
         session: URLSession = .shared,
         timeout: TimeInterval = 10

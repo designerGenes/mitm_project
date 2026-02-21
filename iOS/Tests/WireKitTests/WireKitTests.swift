@@ -9,7 +9,7 @@ final class WireKitTests: XCTestCase {
     override func setUp() {
         super.setUp()
         session = MockURLProtocol.session()
-        client = WireClient(port: 9090, session: session)
+        client = WireClient(port: 18081, session: session)
     }
 
     override func tearDown() {
@@ -52,7 +52,7 @@ final class WireKitTests: XCTestCase {
     func testStatus() throws {
         let json = """
         {
-            "config": {"api_port": 9090, "proxy_port": 8080},
+            "config": {"api_port": 18081, "proxy_port": 8080},
             "current_span": "test",
             "exchange_count": 3,
             "spans": {"test": {"started_at": "2025-01-01T00:00:00", "stopped_at": null}}
@@ -302,7 +302,7 @@ final class WireKitTests: XCTestCase {
     // MARK: - Wire Static Facade
 
     func testWireConfigureAndQuery() throws {
-        Wire.configure(port: 9090, session: session)
+        Wire.configure(port: 18081, session: session)
 
         let responseJson = """
         {

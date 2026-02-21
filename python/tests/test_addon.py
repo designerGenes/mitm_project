@@ -25,7 +25,7 @@ def spans():
 
 @pytest.fixture
 def addon(store, spans):
-    return WireAddon(store, spans, api_port=9090)
+    return WireAddon(store, spans, api_port=18081)
 
 
 def _make_flow(
@@ -134,12 +134,12 @@ class TestWireAddon:
         assert ex.method == "POST"
 
     def test_filters_control_traffic(self, addon, store):
-        flow = _make_flow(url="http://localhost:9090/health")
+        flow = _make_flow(url="http://localhost:18081/health")
         addon.response(flow)
         assert store.count() == 0
 
     def test_filters_control_traffic_127(self, addon, store):
-        flow = _make_flow(url="http://127.0.0.1:9090/span/start")
+        flow = _make_flow(url="http://127.0.0.1:18081/span/start")
         addon.response(flow)
         assert store.count() == 0
 

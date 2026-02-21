@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from wire.models import SpanQueryRequest, SpanQueryResponse, AnswerResult
+from wire.models import SpanQueryRequest, SpanQueryResponse
 from wire.store.data_store import DataStore
 from wire.store.span_manager import SpanManager
 from wire.query.scope import resolve_scope

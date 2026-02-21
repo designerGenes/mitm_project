@@ -20,12 +20,12 @@ final class MyFeatureTests: XCTestCase {
         app = XCUIApplication()
         app.launch()
 
-        // Configure client (default port 9090)
-        Wire.configure(port: 9090)
+        // Configure client (default port 18081)
+        Wire.configure(port: 18081)
 
         // Skip all tests if daemon is unreachable
         let healthy = (try? Wire.health()) ?? false
-        try XCTSkipUnless(healthy, "Wire daemon not running on :9090")
+        try XCTSkipUnless(healthy, "Wire daemon not running on :18081")
 
         // Clear all data from previous tests
         try Wire.reset()
@@ -307,7 +307,7 @@ final class UserProfileTests: XCTestCase {
         app = XCUIApplication()
         app.launch()
 
-        Wire.configure(port: 9090)
+        Wire.configure(port: 18081)
         let healthy = (try? Wire.health()) ?? false
         try XCTSkipUnless(healthy, "Wire daemon not running")
         try Wire.reset()

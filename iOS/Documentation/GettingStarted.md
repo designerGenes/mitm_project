@@ -56,23 +56,23 @@ uv run wire start
 
 The daemon exposes two ports:
 - **8080** — mitmproxy (route your app's traffic through this)
-- **9090** — HTTP API (WireKit talks to this)
+- **18081** — HTTP API (WireKit talks to this)
 
 ### Verify it's Running
 
 ```bash
 uv run wire status
-# or: curl http://localhost:9090/health
+# or: curl http://localhost:18081/health
 ```
 
 ## Configuration
 
-WireKit connects to `localhost:9090` by default. If you're using custom ports, configure it in your test setUp:
+WireKit connects to `localhost:18081` by default. If you're using custom ports, configure it in your test setUp:
 
 ```swift
 import WireKit
 
-// Default — connects to localhost:9090
+// Default — connects to localhost:18081
 Wire.configure()
 
 // Custom port
@@ -80,7 +80,7 @@ Wire.configure(port: 9091)
 
 // Full customization
 Wire.configure(
-    port: 9090,
+    port: 18081,
     host: "localhost",
     timeout: 15  // seconds
 )
@@ -104,9 +104,9 @@ final class LoginTests: XCTestCase {
         app.launch()
 
         // Configure and verify daemon is running
-        Wire.configure(port: 9090)
+        Wire.configure(port: 18081)
         let healthy = (try? Wire.health()) ?? false
-        try XCTSkipUnless(healthy, "Wire daemon not running on :9090")
+        try XCTSkipUnless(healthy, "Wire daemon not running on :18081")
 
         // Clear previous data
         try Wire.reset()

@@ -221,7 +221,7 @@ final class DecodingTests: XCTestCase {
         let json = """
         {
             "config": {
-                "api_port": 9090,
+                "api_port": 18081,
                 "proxy_port": 8080,
                 "output_dir": "/tmp/traffic",
                 "verbose": false
@@ -234,7 +234,7 @@ final class DecodingTests: XCTestCase {
         }
         """
         let resp = try decode(StatusResponse.self, from: json)
-        XCTAssertEqual(resp.config?.apiPort, 9090)
+        XCTAssertEqual(resp.config?.apiPort, 18081)
         XCTAssertEqual(resp.config?.proxyPort, 8080)
         XCTAssertEqual(resp.config?.outputDir, "/tmp/traffic")
         XCTAssertEqual(resp.config?.verbose, false)

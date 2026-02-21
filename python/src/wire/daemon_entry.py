@@ -9,7 +9,7 @@ from wire.daemon import start
 
 def main() -> None:
     config = WireConfig(
-        api_port=int(os.environ.get("WIRE_API_PORT", "9090")),
+        api_port=int(os.environ.get("WIRE_API_PORT", "18081")),
         proxy_port=int(os.environ.get("WIRE_PROXY_PORT", "8080")),
         verbose=os.environ.get("WIRE_VERBOSE", "0") == "1",
         unsafe=os.environ.get("WIRE_UNSAFE", "0") == "1",

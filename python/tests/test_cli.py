@@ -26,7 +26,7 @@ class TestLaunchdPlist:
         assert plist["KeepAlive"] is True
         assert plist["RunAtLoad"] is False
         env = plist["EnvironmentVariables"]
-        assert env["WIRE_API_PORT"] == "9090"
+        assert env["WIRE_API_PORT"] == "18081"
         assert env["WIRE_PROXY_PORT"] == "8080"
         assert env["WIRE_VERBOSE"] == "0"
         assert env["WIRE_UNSAFE"] == "0"
@@ -94,7 +94,7 @@ class TestCliStatus:
         mock_resp = MagicMock()
         mock_resp.json.return_value = {
             "config": {
-                "api_port": 9090,
+                "api_port": 18081,
                 "proxy_port": 8080,
                 "output_dir": "/tmp/traffic",
                 "verbose": False,
@@ -110,7 +110,7 @@ class TestCliStatus:
             mock_httpx.ConnectError = __import__("httpx").ConnectError
             result = runner.invoke(cli, ["status"])
             assert "running" in result.output
-            assert "9090" in result.output
+            assert "18081" in result.output
             assert "test_span" in result.output
             assert "5" in result.output
 

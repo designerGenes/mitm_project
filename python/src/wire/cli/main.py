@@ -17,14 +17,14 @@ def _api_url(port: int, path: str) -> str:
 
 
 def _daemon_port() -> int:
-    """Read the API port from the running plist, or default to 9090."""
+    """Read the API port from the running plist, or default to 18081."""
     import plistlib
     try:
         with open(launchd.PLIST_PATH, "rb") as f:
             plist = plistlib.load(f)
-        return int(plist.get("EnvironmentVariables", {}).get("WIRE_API_PORT", "9090"))
+        return int(plist.get("EnvironmentVariables", {}).get("WIRE_API_PORT", "18081"))
     except Exception:
-        return 9090
+        return 18081
 
 
 @click.group()
@@ -34,7 +34,7 @@ def cli():
 
 
 @cli.command()
-@click.option("--port", default=9090, help="HTTP API server port")
+@click.option("--port", default=18081, envvar="WIRE_API_PORT", help="HTTP API server port")
 @click.option("--proxy-port", default=8080, help="mitmproxy listening port")
 @click.option("--output", default=None, help="Output directory for traffic data")
 @click.option("--verbose", is_flag=True, help="Log captured traffic to stdout")
@@ -60,7 +60,7 @@ def start(port: int, proxy_port: int, output: str | None, verbose: bool, unsafe:
 
     # Check if already running
     if launchd.is_loaded():
-        click.echo(f"WIRE is already running. Use 'wire stop' first.")
+        click.echo("WIRE is already running. Use 'wire stop' first.")
         sys.exit(1)
 
     # Write plist and load via launchd
@@ -156,7 +156,7 @@ def status(port: int | None, as_json: bool):
 
     # Pretty-print
     config = data.get("config", {})
-    click.echo(f"WIRE is running")
+    click.echo("WIRE is running")
     click.echo(f"  API port:       {config.get('api_port')}")
     click.echo(f"  Proxy port:     {config.get('proxy_port')}")
     click.echo(f"  Output dir:     {config.get('output_dir')}")
