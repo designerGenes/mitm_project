@@ -14,8 +14,8 @@ For architecture details, design specifications, and development notes see the
 
 ## Documentation
 
-- [Python documentation](python/Documentation/README.md)
-- [iOS documentation](iOS/Documentation/README.md)
+- [Python documentation](python/Documentation/)
+- [iOS documentation](iOS/Documentation/)
 
 ## Getting Started
 
