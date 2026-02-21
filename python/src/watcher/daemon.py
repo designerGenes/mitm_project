@@ -26,9 +26,11 @@ async def run_server(config: WatcherConfig) -> None:
     app = create_app(config, data_store, span_manager, shutdown_event, disk_writer)
 
     # --- uvicorn (HTTP API) ---
+    # Bind to localhost only — we only serve the iOS simulator and local CLI,
+    # not the wider network. This also avoids needing sudo on enterprise Macs.
     uv_config = uvicorn.Config(
         app,
-        host="0.0.0.0",
+        host="127.0.0.1",
         port=config.api_port,
         log_level="info" if config.verbose else "warning",
     )
@@ -39,6 +41,12 @@ async def run_server(config: WatcherConfig) -> None:
         listen_host="127.0.0.1",
         listen_port=config.proxy_port,
     )
+    # In unsafe mode, skip upstream TLS certificate verification.
+    # This is required on enterprise networks where Zscaler or similar
+    # TLS-inspection proxies re-sign traffic with their own CA, causing
+    # "self-signed certificate in certificate chain" errors.
+    if config.unsafe:
+        opts.update(ssl_insecure=True)
     master = DumpMaster(opts, with_termlog=config.verbose, with_dumper=False)
     addon = WatcherAddon(data_store, span_manager, config.api_port, disk_writer)
     master.addons.add(addon)

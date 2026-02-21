@@ -29,6 +29,7 @@ class TestLaunchdPlist:
         assert env["WATCHER_API_PORT"] == "9090"
         assert env["WATCHER_PROXY_PORT"] == "8080"
         assert env["WATCHER_VERBOSE"] == "0"
+        assert env["WATCHER_UNSAFE"] == "0"
 
     def test_generate_plist_custom(self):
         plist = launchd.generate_plist(
@@ -36,12 +37,14 @@ class TestLaunchdPlist:
             proxy_port=9999,
             output_dir="/tmp/traffic",
             verbose=True,
+            unsafe=True,
         )
         env = plist["EnvironmentVariables"]
         assert env["WATCHER_API_PORT"] == "8888"
         assert env["WATCHER_PROXY_PORT"] == "9999"
         assert env["WATCHER_OUTPUT_DIR"] == "/tmp/traffic"
         assert env["WATCHER_VERBOSE"] == "1"
+        assert env["WATCHER_UNSAFE"] == "1"
 
     def test_generate_plist_has_log_paths(self):
         plist = launchd.generate_plist()
@@ -171,6 +174,7 @@ class TestCliStart:
         assert "--port" in result.output
         assert "--proxy-port" in result.output
         assert "--verbose" in result.output
+        assert "--unsafe" in result.output
 
     def test_start_already_running(self, runner):
         with patch("watcher.cli.main.launchd") as mock_launchd:
@@ -178,3 +182,71 @@ class TestCliStart:
             result = runner.invoke(cli, ["start"])
             assert result.exit_code != 0
             assert "already running" in result.output.lower()
+
+    def test_start_unsafe_passed_to_launchd(self, runner):
+        with patch("watcher.cli.main.launchd") as mock_launchd, \
+             patch("watcher.cli.main.httpx") as mock_httpx:
+            mock_launchd.is_loaded.return_value = False
+            mock_launchd.write_plist.return_value = Path("/tmp/fake.plist")
+            mock_launchd.load.return_value = MagicMock(returncode=0)
+            mock_httpx.get.return_value = MagicMock(status_code=200)
+            mock_httpx.ConnectError = __import__("httpx").ConnectError
+
+            runner.invoke(cli, ["start", "--unsafe"])
+
+            _, kwargs = mock_launchd.write_plist.call_args
+            assert kwargs["unsafe"] is True
+
+    def test_start_unsafe_default_false(self, runner):
+        with patch("watcher.cli.main.launchd") as mock_launchd, \
+             patch("watcher.cli.main.httpx") as mock_httpx:
+            mock_launchd.is_loaded.return_value = False
+            mock_launchd.write_plist.return_value = Path("/tmp/fake.plist")
+            mock_launchd.load.return_value = MagicMock(returncode=0)
+            mock_httpx.get.return_value = MagicMock(status_code=200)
+            mock_httpx.ConnectError = __import__("httpx").ConnectError
+
+            runner.invoke(cli, ["start"])
+
+            _, kwargs = mock_launchd.write_plist.call_args
+            assert kwargs["unsafe"] is False
+
+
+class TestUnsafeConfig:
+    def test_config_unsafe_default_false(self):
+        from watcher.config import WatcherConfig
+        config = WatcherConfig()
+        assert config.unsafe is False
+
+    def test_config_unsafe_in_dict(self):
+        from watcher.config import WatcherConfig
+        config = WatcherConfig(unsafe=True)
+        d = config.to_dict()
+        assert d["unsafe"] is True
+
+    def test_generate_plist_unsafe_flag(self):
+        plist = launchd.generate_plist(unsafe=True)
+        assert plist["EnvironmentVariables"]["WATCHER_UNSAFE"] == "1"
+
+    def test_generate_plist_unsafe_default(self):
+        plist = launchd.generate_plist()
+        assert plist["EnvironmentVariables"]["WATCHER_UNSAFE"] == "0"
+
+    def test_daemon_entry_reads_unsafe_env(self):
+        import os
+        from watcher.daemon_entry import main
+        with patch.dict(os.environ, {"WATCHER_UNSAFE": "1"}), \
+             patch("watcher.daemon_entry.start") as mock_start:
+            main()
+            config = mock_start.call_args[0][0]
+            assert config.unsafe is True
+
+    def test_daemon_entry_unsafe_default(self):
+        import os
+        from watcher.daemon_entry import main
+        env = {k: v for k, v in os.environ.items() if k != "WATCHER_UNSAFE"}
+        with patch.dict(os.environ, env, clear=True), \
+             patch("watcher.daemon_entry.start") as mock_start:
+            main()
+            config = mock_start.call_args[0][0]
+            assert config.unsafe is False

@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/IntegrationTests.build/master.swiftdeps"
+  },
+  "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Tests/IntegrationTests/LiveIntegrationTests.swift": {
+    "dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/IntegrationTests.build/LiveIntegrationTests.d",
+    "object": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/IntegrationTests.build/LiveIntegrationTests.swift.o",
+    "swiftmodule": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/IntegrationTests.build/LiveIntegrationTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/IntegrationTests.build/LiveIntegrationTests.swiftdeps",
+    "diagnostics": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/IntegrationTests.build/LiveIntegrationTests.dia"
+  }
+}

@@ -14,6 +14,7 @@ class WatcherConfig:
     proxy_port: int = 8080
     output_dir: Path = field(default_factory=lambda: _DEFAULT_OUTPUT)
     verbose: bool = False
+    unsafe: bool = False
 
     def to_dict(self) -> dict:
         return {
@@ -21,4 +22,5 @@ class WatcherConfig:
             "proxy_port": self.proxy_port,
             "output_dir": str(self.output_dir),
             "verbose": self.verbose,
+            "unsafe": self.unsafe,
         }

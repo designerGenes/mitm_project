@@ -19,6 +19,7 @@ def generate_plist(
     proxy_port: int = 8080,
     output_dir: str | None = None,
     verbose: bool = False,
+    unsafe: bool = False,
 ) -> dict:
     """Generate the launchd plist dictionary."""
     # Build the command to run the daemon
@@ -30,6 +31,7 @@ def generate_plist(
         "WATCHER_API_PORT": str(port),
         "WATCHER_PROXY_PORT": str(proxy_port),
         "WATCHER_VERBOSE": "1" if verbose else "0",
+        "WATCHER_UNSAFE": "1" if unsafe else "0",
     }
     if output_dir:
         env["WATCHER_OUTPUT_DIR"] = output_dir
@@ -54,6 +56,7 @@ def write_plist(
     proxy_port: int = 8080,
     output_dir: str | None = None,
     verbose: bool = False,
+    unsafe: bool = False,
 ) -> Path:
     """Write the plist file to ~/Library/LaunchAgents/."""
     PLIST_DIR.mkdir(parents=True, exist_ok=True)
@@ -62,6 +65,7 @@ def write_plist(
         proxy_port=proxy_port,
         output_dir=output_dir,
         verbose=verbose,
+        unsafe=unsafe,
     )
     with open(PLIST_PATH, "wb") as f:
         plistlib.dump(plist, f)

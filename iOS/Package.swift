@@ -14,5 +14,6 @@ let package = Package(
     targets: [
         .target(name: "WatcherClient"),
         .testTarget(name: "WatcherClientTests", dependencies: ["WatcherClient"]),
+        .testTarget(name: "IntegrationTests", dependencies: ["WatcherClient"]),
     ]
 )

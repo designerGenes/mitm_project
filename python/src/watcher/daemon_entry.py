@@ -12,6 +12,7 @@ def main() -> None:
         api_port=int(os.environ.get("WATCHER_API_PORT", "9090")),
         proxy_port=int(os.environ.get("WATCHER_PROXY_PORT", "8080")),
         verbose=os.environ.get("WATCHER_VERBOSE", "0") == "1",
+        unsafe=os.environ.get("WATCHER_UNSAFE", "0") == "1",
     )
     output = os.environ.get("WATCHER_OUTPUT_DIR")
     if output:

@@ -38,8 +38,9 @@ def cli():
 @click.option("--proxy-port", default=8080, help="mitmproxy listening port")
 @click.option("--output", default=None, help="Output directory for traffic data")
 @click.option("--verbose", is_flag=True, help="Log captured traffic to stdout")
+@click.option("--unsafe", is_flag=True, help="Skip upstream TLS verification (for Zscaler/corporate proxies)")
 @click.option("--foreground", is_flag=True, help="Run in foreground instead of launchd")
-def start(port: int, proxy_port: int, output: str | None, verbose: bool, foreground: bool):
+def start(port: int, proxy_port: int, output: str | None, verbose: bool, unsafe: bool, foreground: bool):
     """Start the Watcher daemon."""
     if foreground:
         from pathlib import Path
@@ -50,6 +51,7 @@ def start(port: int, proxy_port: int, output: str | None, verbose: bool, foregro
             api_port=port,
             proxy_port=proxy_port,
             verbose=verbose,
+            unsafe=unsafe,
         )
         if output:
             config.output_dir = Path(output)
@@ -67,6 +69,7 @@ def start(port: int, proxy_port: int, output: str | None, verbose: bool, foregro
         proxy_port=proxy_port,
         output_dir=output,
         verbose=verbose,
+        unsafe=unsafe,
     )
     click.echo(f"Wrote plist to {plist_path}")
 
