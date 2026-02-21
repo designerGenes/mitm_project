@@ -1,0 +1,47 @@
+{
+  "": {
+    "swift-dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/master.swiftdeps"
+  },
+  "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/Models.swift": {
+    "dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Models.d",
+    "object": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Models.swift.o",
+    "swiftmodule": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Models~partial.swiftmodule",
+    "swift-dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Models.swiftdeps",
+    "diagnostics": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Models.dia"
+  },
+  "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/Question.swift": {
+    "dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Question.d",
+    "object": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Question.swift.o",
+    "swiftmodule": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Question~partial.swiftmodule",
+    "swift-dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Question.swiftdeps",
+    "diagnostics": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Question.dia"
+  },
+  "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/Responses.swift": {
+    "dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Responses.d",
+    "object": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Responses.swift.o",
+    "swiftmodule": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Responses~partial.swiftmodule",
+    "swift-dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Responses.swiftdeps",
+    "diagnostics": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Responses.dia"
+  },
+  "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/Watcher.swift": {
+    "dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Watcher.d",
+    "object": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Watcher.swift.o",
+    "swiftmodule": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Watcher~partial.swiftmodule",
+    "swift-dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Watcher.swiftdeps",
+    "diagnostics": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Watcher.dia"
+  },
+  "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/WatcherClient.swift": {
+    "dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/WatcherClient.d",
+    "object": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/WatcherClient.swift.o",
+    "swiftmodule": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/WatcherClient~partial.swiftmodule",
+    "swift-dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/WatcherClient.swiftdeps",
+    "diagnostics": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/WatcherClient.dia"
+  },
+  "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/WatcherError.swift": {
+    "dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/WatcherError.d",
+    "object": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/WatcherError.swift.o",
+    "swiftmodule": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/WatcherError~partial.swiftmodule",
+    "swift-dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/WatcherError.swiftdeps",
+    "diagnostics": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/WatcherError.dia"
+  }
+}

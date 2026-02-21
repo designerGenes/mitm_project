@@ -14,6 +14,7 @@ from watcher.capture.normalize import (
 )
 from watcher.store.data_store import DataStore
 from watcher.store.span_manager import SpanManager
+from watcher.persistence.writer import DiskWriter
 
 logger = logging.getLogger(__name__)
 
@@ -38,10 +39,12 @@ class WatcherAddon:
         data_store: DataStore,
         span_manager: SpanManager,
         api_port: int,
+        disk_writer: DiskWriter | None = None,
     ) -> None:
         self._store = data_store
         self._span_manager = span_manager
         self._api_port = api_port
+        self._writer = disk_writer
 
     def _is_control_traffic(self, flow: http.HTTPFlow) -> bool:
         """Return True if this flow is a request to Watcher's own HTTP API."""
@@ -114,6 +117,13 @@ class WatcherAddon:
         )
 
         self._store.add(exchange)
+
+        # Write-behind to disk
+        if self._writer:
+            try:
+                self._writer.write(exchange)
+            except Exception:
+                logger.exception("Failed to write exchange to disk")
 
         if logger.isEnabledFor(logging.DEBUG):
             logger.debug(

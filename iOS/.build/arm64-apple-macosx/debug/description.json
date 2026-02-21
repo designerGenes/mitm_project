@@ -1,0 +1,790 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientPackageTests.xctest/Contents/MacOS/WatcherClientPackageTests",
+      "packagePath" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS",
+      "productName" : "WatcherClientPackageTests"
+    }
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.WatcherClient-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/sources",
+      "importPath" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/Models.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/Question.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/Responses.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/Watcher.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/WatcherClient.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/WatcherError.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "WatcherClient",
+      "moduleOutputPath" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/Modules/WatcherClient.swiftmodule",
+      "objects" : [
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Models.swift.o",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Question.swift.o",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Responses.swift.o",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Watcher.swift.o",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/WatcherClient.swift.o",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/WatcherError.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/include/WatcherClient-Swift.h",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "ios"
+      ],
+      "outputFileMapPath" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Models.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Question.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Responses.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Watcher.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/WatcherClient.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/WatcherError.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/Modules/WatcherClient.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/Models.swift",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/Question.swift",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/Responses.swift",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/Watcher.swift",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/WatcherClient.swift",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/WatcherError.swift"
+      ],
+      "tempsPath" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.WatcherClientPackageTests-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientPackageTests.build/sources",
+      "importPath" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientPackageTests.derived/runner.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/Modules/WatcherClientTests.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientPackageTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "WatcherClientPackageTests",
+      "moduleOutputPath" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/Modules/WatcherClientPackageTests.swiftmodule",
+      "objects" : [
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientPackageTests.build/runner.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientPackageTests.build/include/WatcherClientPackageTests-Swift.h",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "ios"
+      ],
+      "outputFileMapPath" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientPackageTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/Modules/WatcherClientPackageTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientPackageTests.derived/runner.swift"
+      ],
+      "tempsPath" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientPackageTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.WatcherClientTests-arm64-apple-macosx26.0-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/sources",
+      "importPath" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Tests/WatcherClientTests/DecodingTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Tests/WatcherClientTests/EncodingTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Tests/WatcherClientTests/MockURLProtocol.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Tests/WatcherClientTests/WatcherClientTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/Modules/WatcherClient.swiftmodule"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/sources"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "WatcherClientTests",
+      "moduleOutputPath" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/Modules/WatcherClientTests.swiftmodule",
+      "objects" : [
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/DecodingTests.swift.o",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/EncodingTests.swift.o",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/MockURLProtocol.swift.o",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/WatcherClientTests.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-incremental",
+        "-enable-batch-mode",
+        "-serialize-diagnostics",
+        "-index-store-path",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-Xfrontend",
+        "-enable-cross-import-overlays",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "ios"
+      ],
+      "outputFileMapPath" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/DecodingTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/EncodingTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/MockURLProtocol.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/WatcherClientTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/Modules/WatcherClientTests.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Tests/WatcherClientTests/DecodingTests.swift",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Tests/WatcherClientTests/EncodingTests.swift",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Tests/WatcherClientTests/MockURLProtocol.swift",
+        "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Tests/WatcherClientTests/WatcherClientTests.swift"
+      ],
+      "tempsPath" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "WatcherClient" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "WatcherClient",
+      "-package-name",
+      "ios",
+      "-c",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/Models.swift",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/Question.swift",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/Responses.swift",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/Watcher.swift",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/WatcherClient.swift",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/WatcherError.swift",
+      "-I",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/include/WatcherClient-Swift.h",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "ios",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "WatcherClientPackageTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "WatcherClientPackageTests",
+      "-package-name",
+      "ios",
+      "-c",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientPackageTests.derived/runner.swift",
+      "-I",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientPackageTests.build/include/WatcherClientPackageTests-Swift.h",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "ios",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "WatcherClientTests" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "WatcherClientTests",
+      "-package-name",
+      "ios",
+      "-c",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Tests/WatcherClientTests/DecodingTests.swift",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Tests/WatcherClientTests/EncodingTests.swift",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Tests/WatcherClientTests/MockURLProtocol.swift",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Tests/WatcherClientTests/WatcherClientTests.swift",
+      "-I",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-incremental",
+      "-enable-batch-mode",
+      "-serialize-diagnostics",
+      "-index-store-path",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-Xfrontend",
+      "-enable-cross-import-overlays",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.1.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "ios",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "WatcherClient" : [
+
+    ],
+    "WatcherClientPackageTests" : [
+      "WatcherClientTests",
+      "WatcherClient"
+    ],
+    "WatcherClientTests" : [
+      "WatcherClient"
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+    "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientPackageTests.derived/runner.swift" : {
+      "inputs" : [
+
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientPackageTests.derived/runner.swift"
+        }
+      ]
+    }
+  },
+  "traitConfiguration" : {
+    "default" : {
+
+    }
+  },
+  "writeCommands" : {
+    "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/Models.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/Question.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/Responses.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/Watcher.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/WatcherClient.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Sources/WatcherClient/WatcherError.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/sources"
+    },
+    "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientPackageTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientPackageTests.derived/runner.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientPackageTests.build/sources"
+    },
+    "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientPackageTests.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Models.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Question.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Responses.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/Watcher.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/WatcherClient.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/WatcherError.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/DecodingTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/EncodingTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/MockURLProtocol.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/WatcherClientTests.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientPackageTests.product/Objects.LinkFileList"
+    },
+    "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Tests/WatcherClientTests/DecodingTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Tests/WatcherClientTests/EncodingTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Tests/WatcherClientTests/MockURLProtocol.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Tests/WatcherClientTests/WatcherClientTests.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/sources"
+    },
+    "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+    }
+  }
+}

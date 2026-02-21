@@ -28,8 +28,11 @@ async def status(request: Request):
 async def reset(request: Request):
     data_store = request.app.state.data_store
     span_manager = request.app.state.span_manager
+    disk_writer = request.app.state.disk_writer
     data_store.reset()
     span_manager.reset()
+    if disk_writer is not None:
+        disk_writer.reset()
     return {"status": "reset"}
 
 

@@ -1,0 +1,33 @@
+{
+  "": {
+    "swift-dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/master.swiftdeps"
+  },
+  "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Tests/WatcherClientTests/DecodingTests.swift": {
+    "dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/DecodingTests.d",
+    "object": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/DecodingTests.swift.o",
+    "swiftmodule": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/DecodingTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/DecodingTests.swiftdeps",
+    "diagnostics": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/DecodingTests.dia"
+  },
+  "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Tests/WatcherClientTests/EncodingTests.swift": {
+    "dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/EncodingTests.d",
+    "object": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/EncodingTests.swift.o",
+    "swiftmodule": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/EncodingTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/EncodingTests.swiftdeps",
+    "diagnostics": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/EncodingTests.dia"
+  },
+  "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Tests/WatcherClientTests/MockURLProtocol.swift": {
+    "dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/MockURLProtocol.d",
+    "object": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/MockURLProtocol.swift.o",
+    "swiftmodule": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/MockURLProtocol~partial.swiftmodule",
+    "swift-dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/MockURLProtocol.swiftdeps",
+    "diagnostics": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/MockURLProtocol.dia"
+  },
+  "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/Tests/WatcherClientTests/WatcherClientTests.swift": {
+    "dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/WatcherClientTests.d",
+    "object": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/WatcherClientTests.swift.o",
+    "swiftmodule": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/WatcherClientTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/WatcherClientTests.swiftdeps",
+    "diagnostics": "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClientTests.build/WatcherClientTests.dia"
+  }
+}

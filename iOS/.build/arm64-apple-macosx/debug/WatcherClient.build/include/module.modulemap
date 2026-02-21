@@ -1,0 +1,3 @@
+module WatcherClient {
+    header "/Users/jadennation/DEV/01_active_projects/mitm_project/iOS/.build/arm64-apple-macosx/debug/WatcherClient.build/include/WatcherClient-Swift.h"
+}

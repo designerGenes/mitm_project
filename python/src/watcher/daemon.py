@@ -11,6 +11,7 @@ from watcher.config import WatcherConfig
 from watcher.store.data_store import DataStore
 from watcher.store.span_manager import SpanManager
 from watcher.capture.addon import WatcherAddon
+from watcher.persistence.writer import DiskWriter
 from watcher.api.app import create_app
 
 logger = logging.getLogger(__name__)
@@ -21,7 +22,8 @@ async def run_server(config: WatcherConfig) -> None:
     span_manager = SpanManager()
     shutdown_event = asyncio.Event()
 
-    app = create_app(config, data_store, span_manager, shutdown_event)
+    disk_writer = DiskWriter(config.output_dir)
+    app = create_app(config, data_store, span_manager, shutdown_event, disk_writer)
 
     # --- uvicorn (HTTP API) ---
     uv_config = uvicorn.Config(
@@ -38,7 +40,7 @@ async def run_server(config: WatcherConfig) -> None:
         listen_port=config.proxy_port,
     )
     master = DumpMaster(opts, with_termlog=config.verbose, with_dumper=False)
-    addon = WatcherAddon(data_store, span_manager, config.api_port)
+    addon = WatcherAddon(data_store, span_manager, config.api_port, disk_writer)
     master.addons.add(addon)
 
     # Stash master on app state so /admin/shutdown can stop the proxy too
