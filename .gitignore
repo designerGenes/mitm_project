@@ -1,0 +1,39 @@
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+*.eggs
+build/
+dist/
+.python-version
+venv/
+.env
+.env.*
+*.swp
+
+# Virtual environments managed by uv
+.venv/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Xcode
+build/
+DerivedData/
+*.xcworkspace
+*.xcuserstate
+*.xcuserdatad
+
+# General
+*.log
+*.tmp
+
