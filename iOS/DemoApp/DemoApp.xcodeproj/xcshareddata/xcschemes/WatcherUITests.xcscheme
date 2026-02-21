@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "48522599B8D65546D879B4CE"
-               BuildableName = "WatcherUITests.xctest"
-               BlueprintName = "WatcherUITests"
+               BuildableName = "WireUITests.xctest"
+               BlueprintName = "WireUITests"
                ReferencedContainer = "container:DemoApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,8 +34,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "48522599B8D65546D879B4CE"
-               BuildableName = "WatcherUITests.xctest"
-               BlueprintName = "WatcherUITests"
+               BuildableName = "WireUITests.xctest"
+               BlueprintName = "WireUITests"
                ReferencedContainer = "container:DemoApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -55,8 +55,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "48522599B8D65546D879B4CE"
-            BuildableName = "WatcherUITests.xctest"
-            BlueprintName = "WatcherUITests"
+            BuildableName = "WireUITests.xctest"
+            BlueprintName = "WireUITests"
             ReferencedContainer = "container:DemoApp.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -71,8 +71,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "48522599B8D65546D879B4CE"
-            BuildableName = "WatcherUITests.xctest"
-            BlueprintName = "WatcherUITests"
+            BuildableName = "WireUITests.xctest"
+            BlueprintName = "WireUITests"
             ReferencedContainer = "container:DemoApp.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

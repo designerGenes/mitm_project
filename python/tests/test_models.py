@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from watcher.models import (
+from wire.models import (
     Exchange,
     ContentType,
     QueryTarget,

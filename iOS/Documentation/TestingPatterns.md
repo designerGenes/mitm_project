@@ -1,6 +1,6 @@
-# Testing Patterns with WatcherClient
+# Testing Patterns with WireKit
 
-Best practices for using WatcherClient in XCUITests and integration tests.
+Best practices for using WireKit in XCUITests and integration tests.
 
 ## XCUITest Setup & Teardown
 
@@ -8,7 +8,7 @@ Best practices for using WatcherClient in XCUITests and integration tests.
 
 ```swift
 import XCTest
-import WatcherClient
+import WireKit
 
 final class MyFeatureTests: XCTestCase {
 
@@ -21,14 +21,14 @@ final class MyFeatureTests: XCTestCase {
         app.launch()
 
         // Configure client (default port 9090)
-        Watcher.configure(port: 9090)
+        Wire.configure(port: 9090)
 
         // Skip all tests if daemon is unreachable
-        let healthy = (try? Watcher.health()) ?? false
-        try XCTSkipUnless(healthy, "Watcher daemon not running on :9090")
+        let healthy = (try? Wire.health()) ?? false
+        try XCTSkipUnless(healthy, "Wire daemon not running on :9090")
 
         // Clear all data from previous tests
-        try Watcher.reset()
+        try Wire.reset()
     }
 
     override func tearDown() {
@@ -39,8 +39,8 @@ final class MyFeatureTests: XCTestCase {
 ```
 
 Key points:
-- `XCTSkipUnless` gracefully skips tests when the daemon isn't running (CI without Watcher, local dev without starting the daemon)
-- `Watcher.reset()` in setUp ensures a clean slate for each test
+- `XCTSkipUnless` gracefully skips tests when the daemon isn't running (CI without Wire, local dev without starting the daemon)
+- `Wire.reset()` in setUp ensures a clean slate for each test
 - `continueAfterFailure = false` stops the test on the first failure
 
 ### Why reset in setUp, not tearDown
@@ -70,7 +70,7 @@ private lazy var proxySession: URLSession = {
 }()
 ```
 
-The iOS Simulator shares the host Mac's network stack, so `127.0.0.1` reaches the local mitmproxy. Use this session for all traffic you want Watcher to capture.
+The iOS Simulator shares the host Mac's network stack, so `127.0.0.1` reaches the local mitmproxy. Use this session for all traffic you want Wire to capture.
 
 ### Making requests through the proxy
 
@@ -115,7 +115,7 @@ The most common pattern: start a span at the beginning of the user action, stop 
 
 ```swift
 func testCheckoutFlow() throws {
-    try Watcher.startSpan(named: "checkout")
+    try Wire.startSpan(named: "checkout")
 
     // Drive the UI
     app.buttons["Add to Cart"].tap()
@@ -126,10 +126,10 @@ func testCheckoutFlow() throws {
     let confirmation = app.staticTexts["Order Confirmed"]
     XCTAssertTrue(confirmation.waitForExistence(timeout: 10))
 
-    try Watcher.stopSpan()
+    try Wire.stopSpan()
 
     // Now query the captured traffic
-    let status = try Watcher.query(
+    let status = try Wire.query(
         scope: .span("checkout"),
         target: .init(domain: "api.example.com", endpoint: "/orders", method: .POST),
         question: .responseStatus
@@ -145,24 +145,24 @@ For tests that cover multiple distinct phases:
 ```swift
 func testLoginThenBrowse() throws {
     // Phase 1: Login
-    try Watcher.startSpan(named: "login")
+    try Wire.startSpan(named: "login")
     // ... login UI actions ...
-    try Watcher.stopSpan()
+    try Wire.stopSpan()
 
     // Phase 2: Browse
-    try Watcher.startSpan(named: "browse")
+    try Wire.startSpan(named: "browse")
     // ... browsing UI actions ...
-    try Watcher.stopSpan()
+    try Wire.stopSpan()
 
     // Assert on each phase independently
-    let loginStatus = try Watcher.query(
+    let loginStatus = try Wire.query(
         scope: .span("login"),
         target: .init(domain: "api.example.com", endpoint: "/auth", method: .POST),
         question: .responseStatus
     )
     XCTAssertEqual(loginStatus.intValue, 200)
 
-    let browseCount = try Watcher.spanQuery(
+    let browseCount = try Wire.spanQuery(
         scope: .span("browse"),
         question: .totalRequestCount
     )
@@ -175,11 +175,11 @@ func testLoginThenBrowse() throws {
 Starting a new span automatically closes the previous one. You don't need to call `stopSpan()` between spans:
 
 ```swift
-try Watcher.startSpan(named: "step1")
+try Wire.startSpan(named: "step1")
 // ... actions ...
-try Watcher.startSpan(named: "step2")  // step1 is auto-closed
+try Wire.startSpan(named: "step2")  // step1 is auto-closed
 // ... actions ...
-try Watcher.stopSpan()                 // stops step2
+try Wire.stopSpan()                 // stops step2
 ```
 
 ---
@@ -189,7 +189,7 @@ try Watcher.stopSpan()                 // stops step2
 ### Boolean assertions (found/not found)
 
 ```swift
-let answer = try Watcher.query(
+let answer = try Wire.query(
     scope: .span("test"),
     target: .init(domain: "api.example.com", endpoint: "/track"),
     question: .requestExists
@@ -201,7 +201,7 @@ XCTAssertEqual(answer.boolValue, true)
 ### Integer assertions (status codes, counts)
 
 ```swift
-let status = try Watcher.query(
+let status = try Wire.query(
     scope: .span("test"),
     target: .init(domain: "api.example.com", endpoint: "/users"),
     question: .responseStatus
@@ -212,7 +212,7 @@ XCTAssertEqual(status.intValue, 200)
 ### String assertions (headers, body values)
 
 ```swift
-let name = try Watcher.query(
+let name = try Wire.query(
     scope: .span("test"),
     target: .init(domain: "api.example.com", endpoint: "/me"),
     question: .responseBodyKeyPath(path: "user.name")
@@ -223,7 +223,7 @@ XCTAssertEqual(name.stringValue, "Alice")
 ### Array assertions (domains, methods, lists)
 
 ```swift
-let domains = try Watcher.spanQuery(
+let domains = try Wire.spanQuery(
     scope: .span("test"),
     question: .domainsContacted
 )
@@ -237,7 +237,7 @@ XCTAssertFalse(list.contains("evil.example.com"))
 Verify a request was NOT made:
 
 ```swift
-let tracking = try Watcher.query(
+let tracking = try Wire.query(
     scope: .span("gdpr_mode"),
     target: .init(domain: "analytics.example.com"),
     question: .requestExists
@@ -248,7 +248,7 @@ XCTAssertEqual(tracking.boolValue, false, "No analytics calls in GDPR mode")
 ### Asserting with reason
 
 ```swift
-let answer = try Watcher.query(
+let answer = try Wire.query(
     scope: .span("test"),
     target: .init(domain: "nonexistent.example.com"),
     question: .responseStatus
@@ -265,7 +265,7 @@ Instead of making 5 separate network requests to the daemon, combine questions:
 
 ```swift
 // Instead of 5 separate queries...
-let response = try Watcher.query(
+let response = try Wire.query(
     scope: .span("api_call"),
     target: .init(domain: "api.example.com", endpoint: "/users", method: .GET),
     questions: [
@@ -294,7 +294,7 @@ A full XCUITest that exercises the most common patterns:
 
 ```swift
 import XCTest
-import WatcherClient
+import WireKit
 
 final class UserProfileTests: XCTestCase {
 
@@ -307,10 +307,10 @@ final class UserProfileTests: XCTestCase {
         app = XCUIApplication()
         app.launch()
 
-        Watcher.configure(port: 9090)
-        let healthy = (try? Watcher.health()) ?? false
-        try XCTSkipUnless(healthy, "Watcher daemon not running")
-        try Watcher.reset()
+        Wire.configure(port: 9090)
+        let healthy = (try? Wire.health()) ?? false
+        try XCTSkipUnless(healthy, "Wire daemon not running")
+        try Wire.reset()
     }
 
     override func tearDown() {
@@ -323,7 +323,7 @@ final class UserProfileTests: XCTestCase {
     /// Verify the profile screen loads user data correctly.
     func testProfileLoadsUserData() throws {
         // -- Arrange: start span --
-        try Watcher.startSpan(named: "profile_load")
+        try Wire.startSpan(named: "profile_load")
 
         // -- Act: navigate to profile --
         app.tabBars.buttons["Profile"].tap()
@@ -331,10 +331,10 @@ final class UserProfileTests: XCTestCase {
         XCTAssertTrue(nameLabel.waitForExistence(timeout: 5))
 
         // -- Stop span --
-        try Watcher.stopSpan()
+        try Wire.stopSpan()
 
         // -- Assert: verify the API call --
-        let response = try Watcher.query(
+        let response = try Wire.query(
             scope: .span("profile_load"),
             target: .init(
                 domain: "api.example.com",
@@ -364,7 +364,7 @@ final class UserProfileTests: XCTestCase {
                        "Request should include auth header")
 
         // -- Assert: span-level checks --
-        let errors = try Watcher.spanQuery(
+        let errors = try Wire.spanQuery(
             scope: .span("profile_load"),
             question: .errorCount
         )
@@ -373,7 +373,7 @@ final class UserProfileTests: XCTestCase {
 
     /// Verify that updating the profile sends the correct request body.
     func testProfileUpdate() throws {
-        try Watcher.startSpan(named: "profile_update")
+        try Wire.startSpan(named: "profile_update")
 
         // Navigate and edit
         app.tabBars.buttons["Profile"].tap()
@@ -387,10 +387,10 @@ final class UserProfileTests: XCTestCase {
         let saved = app.staticTexts["Saved"].waitForExistence(timeout: 5)
         XCTAssertTrue(saved)
 
-        try Watcher.stopSpan()
+        try Wire.stopSpan()
 
         // Verify the PUT/PATCH request body
-        let name = try Watcher.query(
+        let name = try Wire.query(
             scope: .span("profile_update"),
             target: .init(
                 domain: "api.example.com",
@@ -402,7 +402,7 @@ final class UserProfileTests: XCTestCase {
         XCTAssertEqual(name.stringValue, "New Name")
 
         // Verify the response status
-        let status = try Watcher.query(
+        let status = try Wire.query(
             scope: .span("profile_update"),
             target: .init(
                 domain: "api.example.com",

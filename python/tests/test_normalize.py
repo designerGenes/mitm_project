@@ -1,4 +1,4 @@
-from watcher.capture.normalize import (
+from wire.capture.normalize import (
     classify_content_type,
     normalize_headers,
     normalize_method,
@@ -6,7 +6,7 @@ from watcher.capture.normalize import (
     parse_url,
     try_parse_json,
 )
-from watcher.models import ContentType
+from wire.models import ContentType
 
 
 class TestClassifyContentType:

@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D6DF181F1D7F4161B5FBF21B"
-               BuildableName = "WatcherClient.framework"
-               BlueprintName = "WatcherClient"
+               BuildableName = "WireKit.framework"
+               BlueprintName = "WireKit"
                ReferencedContainer = "container:DemoApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D6DF181F1D7F4161B5FBF21B"
-            BuildableName = "WatcherClient.framework"
-            BlueprintName = "WatcherClient"
+            BuildableName = "WireKit.framework"
+            BlueprintName = "WireKit"
             ReferencedContainer = "container:DemoApp.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -61,8 +61,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D6DF181F1D7F4161B5FBF21B"
-            BuildableName = "WatcherClient.framework"
-            BlueprintName = "WatcherClient"
+            BuildableName = "WireKit.framework"
+            BlueprintName = "WireKit"
             ReferencedContainer = "container:DemoApp.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

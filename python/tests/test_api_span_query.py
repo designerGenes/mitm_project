@@ -7,7 +7,7 @@ import json
 import pytest
 
 from tests.conftest import make_exchange
-from watcher.models import ContentType
+from wire.models import ContentType
 
 
 @pytest.mark.asyncio

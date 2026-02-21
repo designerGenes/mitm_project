@@ -8,15 +8,15 @@ from datetime import datetime, timezone, timedelta
 import pytest
 
 from tests.conftest import make_exchange
-from watcher.models import (
+from wire.models import (
     ContentType,
     SpanQueryRequest,
     SpanFilter,
     Question,
 )
-from watcher.store.data_store import DataStore
-from watcher.store.span_manager import SpanManager
-from watcher.query.span_engine import execute_span_query
+from wire.store.data_store import DataStore
+from wire.store.span_manager import SpanManager
+from wire.query.span_engine import execute_span_query
 
 
 @pytest.fixture

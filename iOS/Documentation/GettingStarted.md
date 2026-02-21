@@ -1,6 +1,6 @@
-# Getting Started with WatcherClient
+# Getting Started with WireKit
 
-WatcherClient is a Swift library for querying HTTP traffic captured by the Watcher daemon. It's designed for iOS UI tests — you interact with your app, then ask Watcher what network calls happened and assert on the results.
+WireKit is a Swift library for querying HTTP traffic captured by the Wire daemon. It's designed for iOS UI tests — you interact with your app, then ask Wire what network calls happened and assert on the results.
 
 ## Installation
 
@@ -10,7 +10,7 @@ Add the dependency to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/your-org/WatcherClient.git", from: "0.1.0"),
+    .package(url: "https://github.com/your-org/WireKit.git", from: "0.1.0"),
 ]
 ```
 
@@ -19,7 +19,7 @@ Or add it to a test target in an existing package:
 ```swift
 .testTarget(
     name: "YourUITests",
-    dependencies: ["WatcherClient"]
+    dependencies: ["WireKit"]
 ),
 ```
 
@@ -31,7 +31,7 @@ The package supports iOS 16+ and macOS 13+.
 
 ```ruby
 target 'YourUITests' do
-  pod 'WatcherClient'
+  pod 'WireKit'
 end
 ```
 
@@ -39,7 +39,7 @@ Then run `pod install`.
 
 ## Prerequisites
 
-### Start the Watcher Daemon
+### Start the Wire Daemon
 
 The daemon captures traffic via mitmproxy. Start it before running tests:
 
@@ -48,38 +48,38 @@ The daemon captures traffic via mitmproxy. Start it before running tests:
 cd python && uv sync
 
 # Run in the foreground (recommended for development)
-uv run watcher start --foreground --verbose
+uv run wire start --foreground --verbose
 
 # Or run as a background launchd service
-uv run watcher start
+uv run wire start
 ```
 
 The daemon exposes two ports:
 - **8080** — mitmproxy (route your app's traffic through this)
-- **9090** — HTTP API (WatcherClient talks to this)
+- **9090** — HTTP API (WireKit talks to this)
 
 ### Verify it's Running
 
 ```bash
-uv run watcher status
+uv run wire status
 # or: curl http://localhost:9090/health
 ```
 
 ## Configuration
 
-WatcherClient connects to `localhost:9090` by default. If you're using custom ports, configure it in your test setUp:
+WireKit connects to `localhost:9090` by default. If you're using custom ports, configure it in your test setUp:
 
 ```swift
-import WatcherClient
+import WireKit
 
 // Default — connects to localhost:9090
-Watcher.configure()
+Wire.configure()
 
 // Custom port
-Watcher.configure(port: 9091)
+Wire.configure(port: 9091)
 
 // Full customization
-Watcher.configure(
+Wire.configure(
     port: 9090,
     host: "localhost",
     timeout: 15  // seconds
@@ -92,7 +92,7 @@ Here's a complete example that captures traffic from a login flow and asserts on
 
 ```swift
 import XCTest
-import WatcherClient
+import WireKit
 
 final class LoginTests: XCTestCase {
 
@@ -104,17 +104,17 @@ final class LoginTests: XCTestCase {
         app.launch()
 
         // Configure and verify daemon is running
-        Watcher.configure(port: 9090)
-        let healthy = (try? Watcher.health()) ?? false
-        try XCTSkipUnless(healthy, "Watcher daemon not running on :9090")
+        Wire.configure(port: 9090)
+        let healthy = (try? Wire.health()) ?? false
+        try XCTSkipUnless(healthy, "Wire daemon not running on :9090")
 
         // Clear previous data
-        try Watcher.reset()
+        try Wire.reset()
     }
 
     func testLoginReturns200() throws {
         // 1. Start a span to tag traffic
-        try Watcher.startSpan(named: "login")
+        try Wire.startSpan(named: "login")
 
         // 2. Interact with the UI (triggers network calls)
         app.textFields["email"].tap()
@@ -128,10 +128,10 @@ final class LoginTests: XCTestCase {
         XCTAssertTrue(loggedIn)
 
         // 4. Stop the span
-        try Watcher.stopSpan()
+        try Wire.stopSpan()
 
         // 5. Query the captured traffic
-        let answer = try Watcher.query(
+        let answer = try Wire.query(
             scope: .span("login"),
             target: .init(domain: "api.example.com", endpoint: "/auth", method: .POST),
             question: .responseStatus
@@ -161,7 +161,7 @@ private lazy var proxySession: URLSession = {
 }()
 ```
 
-Traffic from this session flows through mitmproxy and gets captured by Watcher. The iOS Simulator shares the host Mac's network stack, so `127.0.0.1` reaches the daemon.
+Traffic from this session flows through mitmproxy and gets captured by Wire. The iOS Simulator shares the host Mac's network stack, so `127.0.0.1` reaches the daemon.
 
 ## Core Concepts
 
@@ -170,9 +170,9 @@ Traffic from this session flows through mitmproxy and gets captured by Watcher. 
 Spans tag traffic with a name. Start a span before the action you want to test, stop it after:
 
 ```swift
-try Watcher.startSpan(named: "checkout")
+try Wire.startSpan(named: "checkout")
 // ... user actions that trigger network calls ...
-try Watcher.stopSpan()
+try Wire.stopSpan()
 ```
 
 Only one span can be active at a time. Starting a new span auto-closes the previous one.
@@ -186,7 +186,7 @@ Queries ask questions about captured traffic. Every query has three parts:
 3. **Question** — what to ask about it (`.responseStatus`, `.responseBodyKeyPath(path:)`, etc.)
 
 ```swift
-let answer = try Watcher.query(
+let answer = try Wire.query(
     scope: .span("login"),
     target: .init(domain: "api.example.com", endpoint: "/auth"),
     question: .responseStatus
@@ -207,4 +207,4 @@ if answer.found {
 
 - [API Reference](APIReference.md) — complete reference for all types and methods
 - [Query Guide](QueryGuide.md) — cookbook of query examples by category
-- [Testing Patterns](TestingPatterns.md) — XCUITest best practices with Watcher
+- [Testing Patterns](TestingPatterns.md) — XCUITest best practices with Wire

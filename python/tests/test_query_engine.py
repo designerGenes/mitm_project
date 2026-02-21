@@ -8,14 +8,14 @@ from datetime import datetime, timezone, timedelta
 import pytest
 
 from tests.conftest import make_exchange
-from watcher.models import (
+from wire.models import (
     ContentType,
     QueryRequest,
     QueryTarget,
     Question,
 )
-from watcher.store.data_store import DataStore
-from watcher.query.engine import execute_query
+from wire.store.data_store import DataStore
+from wire.query.engine import execute_query
 
 
 @pytest.fixture

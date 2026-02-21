@@ -1,16 +1,13 @@
-# Watcher
+# WIRE (Web Interception Replay Engine)
 
-Watcher is a macOS background service that wraps `mitmproxy` to capture,
+WIRE is a macOS background service that wraps `mitmproxy` to capture,
 organize and query HTTP traffic originating from an iOS simulator. The
 project is split into two main components:
 
-- `python/` – the daemon that runs under launchd, provides an HTTP API, and
+- `python/` – the daemon (`WIREd`) that runs under launchd, provides an HTTP API, and
   maintains an in‑memory/onshelf store of captured traffic.
-- `iOS/` – a Swift client library (currently a stub) used by UI tests in the
+- `iOS/` – the `WireKit` Swift client library used by UI tests in the
   simulator to start/stop spans and query traffic.
-
-For architecture details, design specifications, and development notes see the
-`FEATURES/WATCHER_DESIGN_SPEC.md` document in the Safe Pocket workspace.
 
 ## Documentation
 

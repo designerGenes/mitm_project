@@ -1,6 +1,6 @@
 from tests.conftest import make_exchange
 
-from watcher.store.data_store import DataStore
+from wire.store.data_store import DataStore
 
 
 class TestDataStore:

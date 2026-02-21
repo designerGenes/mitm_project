@@ -9,8 +9,8 @@ from pathlib import Path
 import pytest
 
 from tests.conftest import make_exchange
-from watcher.models import ContentType
-from watcher.persistence.writer import DiskWriter
+from wire.models import ContentType
+from wire.persistence.writer import DiskWriter
 
 
 @pytest.fixture

@@ -1,11 +1,11 @@
 openapi: 3.1.0
 info:
-  title: Watcher
+  title: WIRE
   version: 0.1.0
   description: |
     HTTP traffic capture and query daemon for iOS simulator testing.
 
-    Watcher wraps mitmproxy to capture HTTP traffic from an iOS simulator,
+    WIRE wraps mitmproxy to capture HTTP traffic from an iOS simulator,
     organizes it by spans, and provides a query engine for asserting on
     captured traffic from XCUITests.
 
@@ -52,7 +52,7 @@ paths:
                 config:
                   api_port: 9090
                   proxy_port: 8080
-                  output_dir: ~/Library/Application Support/Watcher/traffic
+                  output_dir: ~/Library/Application Support/WIRE/traffic
                   verbose: false
                   unsafe: false
                 current_span: login
@@ -91,7 +91,7 @@ paths:
       summary: Shut down the daemon
       description: |
         Initiates a graceful shutdown. Typically called by the CLI
-        (`watcher stop`), not by iOS tests.
+        (`wire stop`), not by iOS tests.
       responses:
         "200":
           description: Shutdown initiated

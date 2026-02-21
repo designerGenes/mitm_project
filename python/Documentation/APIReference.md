@@ -1,12 +1,12 @@
-# Watcher HTTP API Reference
+# WIRE HTTP API Reference
 
-Human-readable reference for the Watcher daemon's HTTP API. For the machine-readable OpenAPI spec, see [`openapi.yaml`](openapi.yaml).
+Human-readable reference for the WIRE daemon's HTTP API. For the machine-readable OpenAPI spec, see [`openapi.yaml`](openapi.yaml).
 
 ## Server
 
 Default: `http://localhost:9090`
 
-Configurable via `watcher start --port <port>`.
+Configurable via `wire start --port <port>`.
 
 ---
 
@@ -37,7 +37,7 @@ curl http://localhost:9090/status
   "config": {
     "api_port": 9090,
     "proxy_port": 8080,
-    "output_dir": "~/Library/Application Support/Watcher/traffic",
+    "output_dir": "~/Library/Application Support/WIRE/traffic",
     "verbose": false,
     "unsafe": false
   },
@@ -64,7 +64,7 @@ curl -X POST http://localhost:9090/reset
 
 ### POST /admin/shutdown
 
-Initiate graceful shutdown. Used by the CLI (`watcher stop`).
+Initiate graceful shutdown. Used by the CLI (`wire stop`).
 
 ```bash
 curl -X POST http://localhost:9090/admin/shutdown
@@ -373,14 +373,14 @@ When `response.found` is `false`:
 The daemon is started via the CLI:
 
 ```bash
-watcher start [OPTIONS]
+wire start [OPTIONS]
 ```
 
 | Flag | Default | Description |
 |------|---------|-------------|
 | `--port` | `9090` | HTTP API server port |
 | `--proxy-port` | `8080` | mitmproxy listening port |
-| `--output` | `~/Library/Application Support/Watcher/traffic/` | Output directory for disk data |
+| `--output` | `~/Library/Application Support/WIRE/traffic/` | Output directory for disk data |
 | `--verbose` | `false` | Log captured traffic to stdout |
 | `--unsafe` | `false` | Skip upstream TLS verification (for corporate proxies) |
 | `--foreground` | `false` | Run in foreground instead of as a launchd service |
@@ -388,8 +388,8 @@ watcher start [OPTIONS]
 Other CLI commands:
 
 ```bash
-watcher stop [--port PORT]     # Stop the daemon
-watcher reset [--port PORT]    # Clear all captured data
-watcher status [--port PORT]   # Show daemon status
-watcher status --json-output   # Output raw JSON
+wire stop [--port PORT]     # Stop the daemon
+wire reset [--port PORT]    # Clear all captured data
+wire status [--port PORT]   # Show daemon status
+wire status --json-output   # Output raw JSON
 ```

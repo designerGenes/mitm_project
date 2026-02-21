@@ -1,13 +1,13 @@
-# WatcherClient API Reference
+# WireKit API Reference
 
-Complete reference for all public types in the WatcherClient Swift library.
+Complete reference for all public types in the WireKit Swift library.
 
-## Watcher (Static Facade)
+## Wire (Static Facade)
 
-The primary API for iOS UI tests. All methods are `static` and delegate to an internal `WatcherClient` instance.
+The primary API for iOS UI tests. All methods are `static` and delegate to an internal `WireKit` instance.
 
 ```swift
-public enum Watcher
+public enum Wire
 ```
 
 ### Configuration
@@ -24,7 +24,7 @@ static func configure(
 Reconfigures the underlying client. Call in your test `setUp` if not using the default port.
 
 ```swift
-static var client: WatcherClient { get }
+static var client: WireKit { get }
 ```
 
 The underlying client instance, if you need direct access.
@@ -109,12 +109,12 @@ Returns `true` if the daemon is alive and responding.
 
 ---
 
-## WatcherClient (Instance-Based)
+## WireKit (Instance-Based)
 
 For advanced usage when you need multiple client instances or custom configuration per-instance.
 
 ```swift
-public final class WatcherClient: @unchecked Sendable
+public final class WireKit: @unchecked Sendable
 ```
 
 ### Initializer
@@ -138,7 +138,7 @@ init(
 
 ### Methods
 
-All methods mirror the static `Watcher` facade — see above for signatures and descriptions:
+All methods mirror the static `Wire` facade — see above for signatures and descriptions:
 
 - `startSpan(named:)`, `stopSpan()`
 - `query(scope:target:questions:)`, `query(scope:target:question:)`
@@ -367,7 +367,7 @@ Cases: `.GET`, `.POST`, `.PUT`, `.DELETE`, `.PATCH`, `.HEAD`, `.OPTIONS`
 
 ## QueryValue
 
-A dynamically-typed JSON value returned by the Watcher daemon.
+A dynamically-typed JSON value returned by the Wire daemon.
 
 ```swift
 public enum QueryValue: Decodable, Equatable, CustomStringConvertible
@@ -401,7 +401,7 @@ public enum QueryValue: Decodable, Equatable, CustomStringConvertible
 
 ## Answer
 
-A single answer from the Watcher daemon.
+A single answer from the Wire daemon.
 
 ```swift
 public struct Answer: Decodable
@@ -513,17 +513,17 @@ public struct SpanInfo: Decodable
 
 ---
 
-## WatcherError
+## WireError
 
-Errors thrown by the Watcher client.
+Errors thrown by the Wire client.
 
 ```swift
-public enum WatcherError: Error, LocalizedError
+public enum WireError: Error, LocalizedError
 ```
 
 | Case | Description |
 |------|-------------|
-| `.connectionFailed(underlying: Error)` | Could not connect to the Watcher daemon |
+| `.connectionFailed(underlying: Error)` | Could not connect to the Wire daemon |
 | `.unexpectedStatus(Int, body: String?)` | Server returned a non-2xx HTTP status |
 | `.decodingFailed(underlying: Error)` | Failed to decode the server response |
 | `.timeout` | The request timed out |

@@ -1,4 +1,4 @@
-from watcher.query.key_path import parse_key_path, resolve_key_path
+from wire.query.key_path import parse_key_path, resolve_key_path
 
 
 class TestParseKeyPath:

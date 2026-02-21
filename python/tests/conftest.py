@@ -5,16 +5,16 @@ from datetime import datetime, timezone, timedelta
 import pytest
 from httpx import ASGITransport, AsyncClient
 
-from watcher.config import WatcherConfig
-from watcher.models import Exchange, ContentType
-from watcher.store.data_store import DataStore
-from watcher.store.span_manager import SpanManager
-from watcher.api.app import create_app
+from wire.config import WireConfig
+from wire.models import Exchange, ContentType
+from wire.store.data_store import DataStore
+from wire.store.span_manager import SpanManager
+from wire.api.app import create_app
 
 
 @pytest.fixture
 def config():
-    return WatcherConfig()
+    return WireConfig()
 
 
 @pytest.fixture

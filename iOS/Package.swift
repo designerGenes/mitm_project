@@ -3,17 +3,17 @@
 import PackageDescription
 
 let package = Package(
-    name: "WatcherClient",
+    name: "WireKit",
     platforms: [
         .iOS(.v16),
         .macOS(.v13),
     ],
     products: [
-        .library(name: "WatcherClient", targets: ["WatcherClient"]),
+        .library(name: "WireKit", targets: ["WireKit"]),
     ],
     targets: [
-        .target(name: "WatcherClient"),
-        .testTarget(name: "WatcherClientTests", dependencies: ["WatcherClient"]),
-        .testTarget(name: "IntegrationTests", dependencies: ["WatcherClient"]),
+        .target(name: "WireKit"),
+        .testTarget(name: "WireKitTests", dependencies: ["WireKit"]),
+        .testTarget(name: "IntegrationTests", dependencies: ["WireKit"]),
     ]
 )

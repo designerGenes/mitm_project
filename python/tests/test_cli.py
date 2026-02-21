@@ -10,8 +10,8 @@ from unittest.mock import patch, MagicMock
 import pytest
 from click.testing import CliRunner
 
-from watcher.cli.main import cli
-from watcher.cli import launchd
+from wire.cli.main import cli
+from wire.cli import launchd
 
 
 @pytest.fixture
@@ -22,14 +22,14 @@ def runner():
 class TestLaunchdPlist:
     def test_generate_plist_defaults(self):
         plist = launchd.generate_plist()
-        assert plist["Label"] == "com.watcher.daemon"
+        assert plist["Label"] == "com.wire.wired"
         assert plist["KeepAlive"] is True
         assert plist["RunAtLoad"] is False
         env = plist["EnvironmentVariables"]
-        assert env["WATCHER_API_PORT"] == "9090"
-        assert env["WATCHER_PROXY_PORT"] == "8080"
-        assert env["WATCHER_VERBOSE"] == "0"
-        assert env["WATCHER_UNSAFE"] == "0"
+        assert env["WIRE_API_PORT"] == "9090"
+        assert env["WIRE_PROXY_PORT"] == "8080"
+        assert env["WIRE_VERBOSE"] == "0"
+        assert env["WIRE_UNSAFE"] == "0"
 
     def test_generate_plist_custom(self):
         plist = launchd.generate_plist(
@@ -40,37 +40,37 @@ class TestLaunchdPlist:
             unsafe=True,
         )
         env = plist["EnvironmentVariables"]
-        assert env["WATCHER_API_PORT"] == "8888"
-        assert env["WATCHER_PROXY_PORT"] == "9999"
-        assert env["WATCHER_OUTPUT_DIR"] == "/tmp/traffic"
-        assert env["WATCHER_VERBOSE"] == "1"
-        assert env["WATCHER_UNSAFE"] == "1"
+        assert env["WIRE_API_PORT"] == "8888"
+        assert env["WIRE_PROXY_PORT"] == "9999"
+        assert env["WIRE_OUTPUT_DIR"] == "/tmp/traffic"
+        assert env["WIRE_VERBOSE"] == "1"
+        assert env["WIRE_UNSAFE"] == "1"
 
     def test_generate_plist_has_log_paths(self):
         plist = launchd.generate_plist()
         assert "StandardOutPath" in plist
         assert "StandardErrorPath" in plist
-        assert "watcher.stdout.log" in plist["StandardOutPath"]
+        assert "wired.stdout.log" in plist["StandardOutPath"]
 
     def test_generate_plist_program_arguments(self):
         plist = launchd.generate_plist()
         args = plist["ProgramArguments"]
         assert args[0] == sys.executable
         assert args[1] == "-m"
-        assert args[2] == "watcher.daemon_entry"
+        assert args[2] == "wire.daemon_entry"
 
     def test_write_plist(self, tmp_path):
         with patch.object(launchd, "PLIST_DIR", tmp_path), \
-             patch.object(launchd, "PLIST_PATH", tmp_path / "com.watcher.daemon.plist"), \
+             patch.object(launchd, "PLIST_PATH", tmp_path / "com.wire.wired.plist"), \
              patch.object(launchd, "LOG_DIR", tmp_path / "logs"):
             path = launchd.write_plist(port=7777)
             assert path.exists()
             with open(path, "rb") as f:
                 data = plistlib.load(f)
-            assert data["EnvironmentVariables"]["WATCHER_API_PORT"] == "7777"
+            assert data["EnvironmentVariables"]["WIRE_API_PORT"] == "7777"
 
     def test_remove_plist(self, tmp_path):
-        plist_file = tmp_path / "com.watcher.daemon.plist"
+        plist_file = tmp_path / "com.wire.wired.plist"
         plist_file.write_text("dummy")
         with patch.object(launchd, "PLIST_PATH", plist_file):
             launchd.remove_plist()
@@ -84,7 +84,7 @@ class TestLaunchdPlist:
 
 class TestCliStatus:
     def test_status_not_running(self, runner):
-        with patch("watcher.cli.main.httpx") as mock_httpx:
+        with patch("wire.cli.main.httpx") as mock_httpx:
             mock_httpx.get.side_effect = __import__("httpx").ConnectError("refused")
             mock_httpx.ConnectError = __import__("httpx").ConnectError
             result = runner.invoke(cli, ["status"])
@@ -105,7 +105,7 @@ class TestCliStatus:
                 "test_span": {"started_at": "2025-01-01T00:00:00", "stopped_at": None},
             },
         }
-        with patch("watcher.cli.main.httpx") as mock_httpx:
+        with patch("wire.cli.main.httpx") as mock_httpx:
             mock_httpx.get.return_value = mock_resp
             mock_httpx.ConnectError = __import__("httpx").ConnectError
             result = runner.invoke(cli, ["status"])
@@ -117,7 +117,7 @@ class TestCliStatus:
     def test_status_json_output(self, runner):
         mock_resp = MagicMock()
         mock_resp.json.return_value = {"config": {}, "current_span": None, "exchange_count": 0, "spans": {}}
-        with patch("watcher.cli.main.httpx") as mock_httpx:
+        with patch("wire.cli.main.httpx") as mock_httpx:
             mock_httpx.get.return_value = mock_resp
             mock_httpx.ConnectError = __import__("httpx").ConnectError
             result = runner.invoke(cli, ["status", "--json-output"])
@@ -128,14 +128,14 @@ class TestCliReset:
     def test_reset_success(self, runner):
         mock_resp = MagicMock()
         mock_resp.status_code = 200
-        with patch("watcher.cli.main.httpx") as mock_httpx:
+        with patch("wire.cli.main.httpx") as mock_httpx:
             mock_httpx.post.return_value = mock_resp
             mock_httpx.ConnectError = __import__("httpx").ConnectError
             result = runner.invoke(cli, ["reset"])
             assert "reset" in result.output.lower()
 
     def test_reset_not_running(self, runner):
-        with patch("watcher.cli.main.httpx") as mock_httpx:
+        with patch("wire.cli.main.httpx") as mock_httpx:
             mock_httpx.post.side_effect = __import__("httpx").ConnectError("refused")
             mock_httpx.ConnectError = __import__("httpx").ConnectError
             result = runner.invoke(cli, ["reset"])
@@ -146,8 +146,8 @@ class TestCliStop:
     def test_stop_sends_shutdown(self, runner):
         mock_resp = MagicMock()
         mock_resp.status_code = 200
-        with patch("watcher.cli.main.httpx") as mock_httpx, \
-             patch("watcher.cli.main.launchd") as mock_launchd:
+        with patch("wire.cli.main.httpx") as mock_httpx, \
+             patch("wire.cli.main.launchd") as mock_launchd:
             mock_httpx.post.return_value = mock_resp
             mock_httpx.ConnectError = __import__("httpx").ConnectError
             mock_launchd.is_loaded.return_value = True
@@ -157,8 +157,8 @@ class TestCliStop:
             mock_launchd.unload.assert_called_once()
 
     def test_stop_daemon_not_responding(self, runner):
-        with patch("watcher.cli.main.httpx") as mock_httpx, \
-             patch("watcher.cli.main.launchd") as mock_launchd:
+        with patch("wire.cli.main.httpx") as mock_httpx, \
+             patch("wire.cli.main.launchd") as mock_launchd:
             mock_httpx.post.side_effect = __import__("httpx").ConnectError("refused")
             mock_httpx.ConnectError = __import__("httpx").ConnectError
             mock_launchd.is_loaded.return_value = False
@@ -177,15 +177,15 @@ class TestCliStart:
         assert "--unsafe" in result.output
 
     def test_start_already_running(self, runner):
-        with patch("watcher.cli.main.launchd") as mock_launchd:
+        with patch("wire.cli.main.launchd") as mock_launchd:
             mock_launchd.is_loaded.return_value = True
             result = runner.invoke(cli, ["start"])
             assert result.exit_code != 0
             assert "already running" in result.output.lower()
 
     def test_start_unsafe_passed_to_launchd(self, runner):
-        with patch("watcher.cli.main.launchd") as mock_launchd, \
-             patch("watcher.cli.main.httpx") as mock_httpx:
+        with patch("wire.cli.main.launchd") as mock_launchd, \
+             patch("wire.cli.main.httpx") as mock_httpx:
             mock_launchd.is_loaded.return_value = False
             mock_launchd.write_plist.return_value = Path("/tmp/fake.plist")
             mock_launchd.load.return_value = MagicMock(returncode=0)
@@ -198,8 +198,8 @@ class TestCliStart:
             assert kwargs["unsafe"] is True
 
     def test_start_unsafe_default_false(self, runner):
-        with patch("watcher.cli.main.launchd") as mock_launchd, \
-             patch("watcher.cli.main.httpx") as mock_httpx:
+        with patch("wire.cli.main.launchd") as mock_launchd, \
+             patch("wire.cli.main.httpx") as mock_httpx:
             mock_launchd.is_loaded.return_value = False
             mock_launchd.write_plist.return_value = Path("/tmp/fake.plist")
             mock_launchd.load.return_value = MagicMock(returncode=0)
@@ -214,39 +214,39 @@ class TestCliStart:
 
 class TestUnsafeConfig:
     def test_config_unsafe_default_false(self):
-        from watcher.config import WatcherConfig
-        config = WatcherConfig()
+        from wire.config import WireConfig
+        config = WireConfig()
         assert config.unsafe is False
 
     def test_config_unsafe_in_dict(self):
-        from watcher.config import WatcherConfig
-        config = WatcherConfig(unsafe=True)
+        from wire.config import WireConfig
+        config = WireConfig(unsafe=True)
         d = config.to_dict()
         assert d["unsafe"] is True
 
     def test_generate_plist_unsafe_flag(self):
         plist = launchd.generate_plist(unsafe=True)
-        assert plist["EnvironmentVariables"]["WATCHER_UNSAFE"] == "1"
+        assert plist["EnvironmentVariables"]["WIRE_UNSAFE"] == "1"
 
     def test_generate_plist_unsafe_default(self):
         plist = launchd.generate_plist()
-        assert plist["EnvironmentVariables"]["WATCHER_UNSAFE"] == "0"
+        assert plist["EnvironmentVariables"]["WIRE_UNSAFE"] == "0"
 
     def test_daemon_entry_reads_unsafe_env(self):
         import os
-        from watcher.daemon_entry import main
-        with patch.dict(os.environ, {"WATCHER_UNSAFE": "1"}), \
-             patch("watcher.daemon_entry.start") as mock_start:
+        from wire.daemon_entry import main
+        with patch.dict(os.environ, {"WIRE_UNSAFE": "1"}), \
+             patch("wire.daemon_entry.start") as mock_start:
             main()
             config = mock_start.call_args[0][0]
             assert config.unsafe is True
 
     def test_daemon_entry_unsafe_default(self):
         import os
-        from watcher.daemon_entry import main
-        env = {k: v for k, v in os.environ.items() if k != "WATCHER_UNSAFE"}
+        from wire.daemon_entry import main
+        env = {k: v for k, v in os.environ.items() if k != "WIRE_UNSAFE"}
         with patch.dict(os.environ, env, clear=True), \
-             patch("watcher.daemon_entry.start") as mock_start:
+             patch("wire.daemon_entry.start") as mock_start:
             main()
             config = mock_start.call_args[0][0]
             assert config.unsafe is False

@@ -8,9 +8,9 @@ import pytest
 from mitmproxy import http
 from mitmproxy.test import tflow
 
-from watcher.capture.addon import WatcherAddon, _headers_to_dict
-from watcher.store.data_store import DataStore
-from watcher.store.span_manager import SpanManager
+from wire.capture.addon import WireAddon, _headers_to_dict
+from wire.store.data_store import DataStore
+from wire.store.span_manager import SpanManager
 
 
 @pytest.fixture
@@ -25,7 +25,7 @@ def spans():
 
 @pytest.fixture
 def addon(store, spans):
-    return WatcherAddon(store, spans, api_port=9090)
+    return WireAddon(store, spans, api_port=9090)
 
 
 def _make_flow(
@@ -89,7 +89,7 @@ class TestHeadersToDict:
         assert result["x-custom"] == ["val1", "val2"]
 
 
-class TestWatcherAddon:
+class TestWireAddon:
     def test_captures_basic_exchange(self, addon, store):
         flow = _make_flow()
         addon.response(flow)

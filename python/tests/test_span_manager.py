@@ -1,4 +1,4 @@
-from watcher.store.span_manager import SpanManager
+from wire.store.span_manager import SpanManager
 
 
 class TestSpanManager:
